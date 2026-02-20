@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Jost:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream: #f7f3ed;
+  --dark: #1a1612;
+  --brown: #3d2c1e;
+  --gold: #c8a96e;
+  --gold-light: #e8d5a8;
+  --text: #2c2016;
+  --muted: #7a6a58;
+  --card-bg: #ffffff;
+  --border: #e5ddd4;
+}
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Jost', sans-serif;
+}
+
+/* ── SHARED BUTTONS ── */
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  padding: 16px 36px;
+  border-radius: 8px;
+  transition: all 0.25s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: #b8943e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,169,110,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  padding: 16px 36px;
+  border-radius: 8px;
+  transition: all 0.25s;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ── SHARED PAGE HEADER ── */
+.page-header {
+  background: linear-gradient(135deg, var(--brown) 0%, #1a1612 100%);
+  padding: 70px 5% 60px;
+}
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.page-header p {
+  color: rgba(255,255,255,0.55);
+  font-size: 1rem;
+}
+
+/* ── SHARED FORM ELEMENTS ── */
+.form-group {
+  margin-bottom: 24px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+}
+.form-group textarea {
+  min-height: 110px;
+}
+
+/* ── SHARED SECTION STYLES ── */
+.section {
+  padding: 100px 5%;
+}
+.section-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.75;
+}

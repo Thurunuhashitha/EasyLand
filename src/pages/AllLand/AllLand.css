@@ -1,0 +1,80 @@
+/* ── FILTER BAR ── */
+.filter-bar {
+  padding: 24px 5%;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-search {
+  font-family: 'Jost', sans-serif;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-search:focus {
+  border-color: var(--gold);
+}
+
+.filter-select {
+  font-family: 'Jost', sans-serif;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+  border-color: var(--gold);
+}
+
+/* ── GRID SECTION ── */
+.all-land-section {
+  padding: 40px 5%;
+  min-height: 400px;
+}
+
+.lands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* ── EMPTY STATE ── */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.no-results h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.no-results p {
+  font-size: 0.95rem;
+}
