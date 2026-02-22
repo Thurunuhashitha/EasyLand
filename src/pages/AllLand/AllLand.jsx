@@ -1,23 +1,56 @@
-import { useState } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
-import Footer from '../../components/Footer/Footer'
-import LandCard from '../../components/LandCard/LandCard'
-import { SAMPLE_LANDS } from '../../data/lands'
-import './AllLand.css'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import LandCard from '../../components/LandCard/LandCard';
+import './AllLand.css';
 
-const TAGS = ['All', 'Premium', 'Agricultural', 'Residential', 'Coastal', 'Commercial']
+const TAGS = ['All', 'Premium', 'Agricultural', 'Residential', 'Coastal', 'Commercial'];
 
 const AllLand = () => {
-  const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState('All')
+  const [lands, setLands] = useState([]);        // lands from backend
+  const [loading, setLoading] = useState(true);  // loading state
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('All');
 
-  const filtered = SAMPLE_LANDS.filter((land) => {
+  useEffect(() => {
+  const fetchLands = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get('http://localhost:3000/api/land/getall');
+
+      const mappedLands = res.data.data.map((land) => ({
+        id: land.id,
+        img: `http://localhost:3000/${land.image}`, // full URL
+        name: land.owner,
+        owner: land.owner,
+        contact: land.contact,
+        location: land.location,
+        size: land.size,
+        price: land.price,
+        tag: land.type,
+        description: land.description,
+      }));
+
+      setLands(mappedLands);
+    } catch (err) {
+      console.error('Error fetching lands:', err);
+      alert('❌ Failed to fetch land listings');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchLands();
+}, []);
+
+  const filtered = lands.filter((land) => {
     const matchSearch =
       land.name.toLowerCase().includes(search.toLowerCase()) ||
-      land.location.toLowerCase().includes(search.toLowerCase())
-    const matchTag = filter === 'All' || land.tag === filter
-    return matchSearch && matchTag
-  })
+      land.location.toLowerCase().includes(search.toLowerCase());
+    const matchTag = filter === 'All' || land.tag === filter;
+    return matchSearch && matchTag;
+  });
 
   return (
     <>
@@ -25,7 +58,7 @@ const AllLand = () => {
 
       <div className="page-header">
         <h1>All Land Listings</h1>
-        <p>{SAMPLE_LANDS.length} properties available across Sri Lanka</p>
+        <p>{lands.length} properties available across Sri Lanka</p>
       </div>
 
       {/* ── FILTER BAR ── */}
@@ -50,7 +83,9 @@ const AllLand = () => {
 
       {/* ── GRID ── */}
       <div className="all-land-section">
-        {filtered.length > 0 ? (
+        {loading ? (
+          <p className="loading-text">Loading listings...</p>
+        ) : filtered.length > 0 ? (
           <div className="lands-grid">
             {filtered.map((land) => (
               <LandCard key={land.id} land={land} />
@@ -67,7 +102,7 @@ const AllLand = () => {
 
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default AllLand
+export default AllLand;

@@ -1,9 +1,17 @@
-import { useState } from 'react'
-import { TAG_COLORS } from '../../data/lands'
-import './LandCard.css'
+import { useState } from 'react';
+import './LandCard.css';
+
+// Optional TAG_COLORS mapping — you can leave it empty if not needed
+const TAG_COLORS = {
+  Residential: '#4CAF50',
+  Agricultural: '#FF9800',
+  Commercial: '#2196F3',
+  Coastal: '#00BCD4',
+  Premium: '#9C27B0',
+};
 
 const LandCard = ({ land }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -15,20 +23,18 @@ const LandCard = ({ land }) => {
             className="land-tag"
             style={{ background: TAG_COLORS[land.tag] || '#888' }}
           >
-            {land.tag}
+            {land.tag || 'N/A'}
           </span>
-          <span className="land-price">{land.price}</span>
+          <span className="land-price">{land.price ? `Rs. ${land.price}` : 'Price N/A'}</span>
         </div>
 
         <div className="land-card-body">
-          <h3>{land.name}</h3>
-          <div className="land-location">📍 {land.location}</div>
-          <p className="land-desc">{land.description}</p>
+          <h3>{land.name || 'Unknown Owner'}</h3>
+          <div className="land-location">📍 {land.location || 'Unknown Location'}</div>
+          <p className="land-desc">{land.description || 'No description provided.'}</p>
 
           <div className="land-meta">
-            <div className="land-size">
-              {land.size} <span>Perch</span>
-            </div>
+            <div className="land-size">{land.size || 'N/A'} <span>Perch</span></div>
             <button className="btn-view" onClick={() => setOpen(true)}>
               View Details
             </button>
@@ -46,46 +52,50 @@ const LandCard = ({ land }) => {
               <div className="modal-body">
                 <span
                   className="modal-tag"
-                  style={{ background: TAG_COLORS[land.tag] }}
+                  style={{ background: TAG_COLORS[land.tag] || '#888' }}
                 >
-                  {land.tag}
+                  {land.tag || 'N/A'}
                 </span>
-                <h2>{land.name}</h2>
-                <div className="land-location">📍 {land.location}</div>
+                <h2>{land.name || 'Unknown Owner'}</h2>
+                <div className="land-location">📍 {land.location || 'Unknown Location'}</div>
 
                 <div className="modal-grid">
                   <div className="modal-field">
                     <div className="modal-field-label">Size</div>
-                    <div className="modal-field-val">{land.size} Perch</div>
+                    <div className="modal-field-val">{land.size || 'N/A'} Perch</div>
                   </div>
                   <div className="modal-field">
                     <div className="modal-field-label">Price</div>
-                    <div className="modal-field-val">{land.price}</div>
+                    <div className="modal-field-val">{land.price ? `Rs. ${land.price}` : 'N/A'}</div>
                   </div>
                   <div className="modal-field">
                     <div className="modal-field-label">Owner</div>
-                    <div className="modal-field-val">{land.owner}</div>
+                    <div className="modal-field-val">{land.owner || 'Unknown'}</div>
                   </div>
                   <div className="modal-field">
                     <div className="modal-field-label">Contact</div>
-                    <div className="modal-field-val">{land.contact}</div>
+                    <div className="modal-field-val">{land.contact || 'N/A'}</div>
                   </div>
                 </div>
 
-                <p className="modal-desc">{land.description}</p>
+                <p className="modal-desc">{land.description || 'No description provided.'}</p>
 
                 <div className="modal-actions">
-                  <a href={`tel:${land.contact}`} className="btn-call">
-                    📞 Call Owner
-                  </a>
-                  <a
-                    href={`https://wa.me/94${land.contact.slice(1)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-whatsapp"
-                  >
-                    💬 WhatsApp
-                  </a>
+                  {land.contact && (
+                    <>
+                      <a href={`tel:${land.contact}`} className="btn-call">
+                        📞 Call Owner
+                      </a>
+                      <a
+                        href={`https://wa.me/94${land.contact.slice(1)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-whatsapp"
+                      >
+                        💬 WhatsApp
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -97,7 +107,7 @@ const LandCard = ({ land }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LandCard
+export default LandCard;

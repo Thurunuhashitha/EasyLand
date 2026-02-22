@@ -1,25 +1,56 @@
-import { Link } from 'react-router-dom'
-import Navbar from '../../components/Navbar/Navbar'
-import Footer from '../../components/Footer/Footer'
-import LandCard from '../../components/LandCard/LandCard'
-import { SAMPLE_LANDS } from '../../data/lands'
-import './Home.css'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import LandCard from '../../components/LandCard/LandCard';
+import './Home.css';
 
 const STEPS = [
   ['01', 'Browse Listings',  'Explore hundreds of verified land listings across Sri Lanka, filtered by location, size, and price.'],
   ['02', 'Contact Owner',    'Reach out directly to land owners via phone or WhatsApp — no middlemen, no hidden fees.'],
   ['03', 'Seal the Deal',    'Meet on-site, verify documents, and complete your purchase with full confidence.'],
   ['04', 'List Your Land',   'Have land to sell? Add your listing in minutes and connect with thousands of genuine buyers.'],
-]
+];
 
 const FEATURES = [
   { icon: '🚫', title: 'Zero Broker Fees', desc: 'Keep more money in your pocket. No commissions, no hidden charges — ever.' },
   { icon: '💬', title: 'Direct Communication', desc: 'Talk directly to sellers. Real conversations, real answers, faster decisions.' },
   { icon: '🔍', title: 'Transparent Pricing', desc: 'Every listing shows the exact price. No guessing, no back-and-forth.' },
   { icon: '✅', title: 'Verified Sellers', desc: 'All sellers are identity-verified so you deal with confidence every time.' },
-]
+];
 
 const Home = () => {
+  const [lands, setLands] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLands = async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/api/land/getall');
+        const mapped = res.data.data.map((land) => ({
+          id: land.id,
+          img: `http://localhost:3000/${land.image}`,
+          name: land.owner,
+          owner: land.owner,
+          contact: land.contact,
+          location: land.location,
+          size: land.size,
+          price: land.price,
+          tag: land.type,
+          description: land.description,
+        }));
+        setLands(mapped);
+      } catch (err) {
+        console.error('❌ Failed to fetch lands:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLands();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -49,7 +80,7 @@ const Home = () => {
 
           <div className="hero-stats">
             <div className="stat-item">
-              <div className="stat-val">150+</div>
+              <div className="stat-val">{lands.length}</div>
               <div className="stat-label">Active Listings</div>
             </div>
             <div className="stat-divider" />
@@ -136,9 +167,11 @@ const Home = () => {
         </p>
 
         <div className="lands-grid">
-          {SAMPLE_LANDS.slice(0, 3).map((land) => (
-            <LandCard key={land.id} land={land} />
-          ))}
+          {loading ? (
+            <p>Loading lands...</p>
+          ) : (
+            lands.slice(0, 3).map((land) => <LandCard key={land.id} land={land} />)
+          )}
         </div>
 
         <div className="featured-cta">
@@ -159,7 +192,7 @@ const Home = () => {
 
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
