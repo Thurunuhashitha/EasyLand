@@ -1,16 +1,69 @@
-# React + Vite
+# 🏡 Land Sale Website – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the **frontend** of the Land Sale Management System, developed using **React.js**. The application provides a modern, responsive user interface that allows users to browse, search, and filter land listings with detailed information and images.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Overview
 
-## React Compiler
+The frontend is responsible for displaying land listings fetched from the backend through RESTful APIs. It focuses on user experience, responsiveness, and smooth data interaction.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- View all available land listings  
+- Search lands by owner name or location  
+- Filter lands by category (Residential, Agricultural, Commercial, etc.)  
+- Responsive UI design for all screen sizes  
+- Dynamic data fetching using Axios  
+
+---
+
+## 🛠️ Tech Stack
+
+- React.js  
+- JavaScript (ES6+)  
+- HTML5  
+- CSS3  
+- Axios  
+
+---
+
+## 📂 Project Structure
+frontend/
+│
+├── src/
+│ ├── components/
+│ ├── pages/
+│ ├── assets/
+│ ├── App/
+│ └── main.jsx
+│
+├── public/
+├── package.json
+└── README.md
+
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Install Dependencies
+npm install 
+
+## 2️⃣ Configure API Base URL
+VITE_API_URL=http://localhost:3000
+
+## 3️⃣ Run the Application
+npm run dev
+
+## 🌐 API Integration
+GET /api/land/getall
+
+## 👨‍💻 Author
+
+Mr. Thurunu
+Undergraduate Software Engineering Student 
+https://www.linkedin.com/in/thurunu-hashitha-242b58265/
+https://github.com/Thurunuhashitha
