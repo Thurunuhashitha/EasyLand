@@ -105,7 +105,7 @@ const AddLand = () => {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="e.g. Suresh Perera"
+                placeholder="e.g. Thurunu Hashitha"
               />
             </div>
             <div className="form-group">
@@ -114,7 +114,7 @@ const AddLand = () => {
                 name="contact"
                 value={form.contact}
                 onChange={handleChange}
-                placeholder="e.g. 0771234567"
+                placeholder="e.g. 0701111111"
                 type="tel"
               />
             </div>
@@ -127,7 +127,7 @@ const AddLand = () => {
               name="location"
               value={form.location}
               onChange={handleChange}
-              placeholder="e.g. Kandy, Central Province"
+              placeholder="e.g. Ampara, Eastern Province"
             />
           </div>
 
@@ -139,7 +139,7 @@ const AddLand = () => {
                 name="size"
                 value={form.size}
                 onChange={handleChange}
-                placeholder="e.g. 40"
+                placeholder="e.g. 26"
                 type="number"
                 min="1"
               />

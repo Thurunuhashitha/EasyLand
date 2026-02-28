@@ -14,35 +14,38 @@ const AllLand = () => {
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-  const fetchLands = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get('http://localhost:3000/api/land/getall');
+    const fetchLands = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get('http://localhost:3000/api/land/getall');
 
-      const mappedLands = res.data.data.map((land) => ({
-        id: land.id,
-        img: `http://localhost:3000/${land.image}`, // full URL
-        name: land.owner,
-        owner: land.owner,
-        contact: land.contact,
-        location: land.location,
-        size: land.size,
-        price: land.price,
-        tag: land.type,
-        description: land.description,
-      }));
+        const mappedLands = res.data.map((land) => ({
+          id: land.id,
+          img: `http://localhost:3000${land.image}`,
+          video: `http://localhost:3000${land.video}`,
+          name: land.owner,
+          owner: land.owner,
+          contact: land.contact,
+          location: land.location,
+          size: land.size,
+          price: land.price,
+          tag: land.type,
+          description: land.description,
+        }));
 
-      setLands(mappedLands);
-    } catch (err) {
-      console.error('Error fetching lands:', err);
-      alert('❌ Failed to fetch land listings');
-    } finally {
-      setLoading(false);
-    }
-  };
+        setLands(mappedLands);
+      } catch (err) {
+        console.error('Full error:', err);
+        console.error('Response:', err.response);
+        console.error('Message:', err.message);
+        alert('❌ Failed to fetch land listings');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchLands();
-}, []);
+    fetchLands();
+  }, []);
 
   const filtered = lands.filter((land) => {
     const matchSearch =

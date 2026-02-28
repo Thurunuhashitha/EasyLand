@@ -8,10 +8,10 @@ import LandCard from '../../components/LandCard/LandCard';
 import './Home.css';
 
 const STEPS = [
-  ['01', 'Browse Listings',  'Explore hundreds of verified land listings across Sri Lanka, filtered by location, size, and price.'],
-  ['02', 'Contact Owner',    'Reach out directly to land owners via phone or WhatsApp — no middlemen, no hidden fees.'],
-  ['03', 'Seal the Deal',    'Meet on-site, verify documents, and complete your purchase with full confidence.'],
-  ['04', 'List Your Land',   'Have land to sell? Add your listing in minutes and connect with thousands of genuine buyers.'],
+  ['01', 'Browse Listings', 'Explore hundreds of verified land listings across Sri Lanka, filtered by location, size, and price.'],
+  ['02', 'Contact Owner', 'Reach out directly to land owners via phone or WhatsApp — no middlemen, no hidden fees.'],
+  ['03', 'Seal the Deal', 'Meet on-site, verify documents, and complete your purchase with full confidence.'],
+  ['04', 'List Your Land', 'Have land to sell? Add your listing in minutes and connect with thousands of genuine buyers.'],
 ];
 
 const FEATURES = [
@@ -29,9 +29,10 @@ const Home = () => {
     const fetchLands = async () => {
       try {
         const res = await axios.get('http://localhost:3000/api/land/getall');
-        const mapped = res.data.data.map((land) => ({
+        const mapped = res.data.map((land) => ({
           id: land.id,
-          img: `http://localhost:3000/${land.image}`,
+          img: `http://localhost:3000${land.image}`,
+          video: `http://localhost:3000${land.video}`,
           name: land.owner,
           owner: land.owner,
           contact: land.contact,

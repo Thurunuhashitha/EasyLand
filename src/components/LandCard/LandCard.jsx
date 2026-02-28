@@ -18,13 +18,8 @@ const LandCard = ({ land }) => {
       {/* ── CARD ── */}
       <div className="land-card">
         <div className="land-card-img">
-          <img src={land.img} alt={land.name} />
-          <span
-            className="land-tag"
-            style={{ background: TAG_COLORS[land.tag] || '#888' }}
-          >
-            {land.tag || 'N/A'}
-          </span>
+          <img src={land.img} alt={land.name} /> 
+          
           <span className="land-price">{land.price ? `Rs. ${land.price}` : 'Price N/A'}</span>
         </div>
 
@@ -48,14 +43,11 @@ const LandCard = ({ land }) => {
           <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
             <div className="modal">
               <img src={land.img} alt={land.name} className="modal-img" />
+              {land.video && (
+                <video src={land.video} controls className="modal-img" />
+              )}
 
-              <div className="modal-body">
-                <span
-                  className="modal-tag"
-                  style={{ background: TAG_COLORS[land.tag] || '#888' }}
-                >
-                  {land.tag || 'N/A'}
-                </span>
+              <div className="modal-body"> 
                 <h2>{land.name || 'Unknown Owner'}</h2>
                 <div className="land-location">📍 {land.location || 'Unknown Location'}</div>
 
